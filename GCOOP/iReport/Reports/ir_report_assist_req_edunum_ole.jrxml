@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ir_report_assist_req_edunum" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65376fbf-1fc1-45b9-bd47-995d5af1006b">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="as_coopid" class="java.lang.String"/>
+	<parameter name="date1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="date2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="assisttype_start" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="pay_num" class="java.math.BigDecimal"/>
+	<queryString>
+		<![CDATA[select  AR.ASSISTTYPE_CODE,
+AST.ASSISTTYPE_DESC,
+CM.COOP_NAME,
+AP.ASSISTPAY_DESC,
+AP.ASSISTPAY_CODE,
+(select count(ass.assist_docno) from assreqmaster ass where ass.req_status >= 1 and ass.assisttype_code =$P{assisttype_start}) as fullmem,
+count(ap.assistpay_code) as assitpay,
+count(1) as num_pay
+from assreqmaster ar
+join cmcoopconstant cm on cm.coop_id = ar.coop_id
+join mbmembmaster mb on ar.member_no=mb.member_no
+join assucfassisttype ast on ast.assisttype_code = ar.assisttype_code
+join assucfassisttypepay ap on ar.assisttype_code = ap.assisttype_code and ar.assistpay_code = ap.assistpay_code
+where ar.req_date between $P{date1} and $P{date2} and ar.assisttype_code = $P{assisttype_start}  and ar.req_status >= 1 and ar.coop_id = $P{as_coopid}
+group by AR.ASSISTTYPE_CODE,
+AST.ASSISTTYPE_DESC,
+CM.COOP_NAME,
+AP.ASSISTPAY_DESC,
+AP.ASSISTPAY_CODE
+order by ar.assisttype_code , AP.ASSISTPAY_CODE]]>
+	</queryString>
+	<field name="ASSISTTYPE_CODE" class="java.lang.String"/>
+	<field name="ASSISTTYPE_DESC" class="java.lang.String"/>
+	<field name="COOP_NAME" class="java.lang.String"/>
+	<field name="ASSISTPAY_DESC" class="java.lang.String"/>
+	<field name="ASSISTPAY_CODE" class="java.lang.String"/>
+	<field name="fullmem" class="java.lang.Integer"/>
+	<field name="assitpay" class="java.lang.Integer"/>
+	<field name="num_pay" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="0df13d96-c5a0-4102-828d-4d7a67bf297c" x="0" y="20" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[รายงานจำนวนทุนที่ได้รับตามระดับชั้นการศึกษา]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="bc479832-2bbe-4dfc-a6a6-dfcdd7863468" x="0" y="40" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ตั้งแต่ วันที่ "+ new SimpleDateFormat("dd/MM/yyyy ",new Locale("th","TH")).format($P{date1})+" ถึง "+new SimpleDateFormat("dd/MM/yyyy ",new Locale("th","TH")).format($P{date2})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="21bc13a9-9f76-4759-b20f-a800ca42514b" x="404" y="40" width="131" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Angsana New"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" หน้า "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="a570d88e-9f67-42f1-8879-6f54a72fb600" x="535" y="40" width="20" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Angsana New"/>
+				</textElement>
+				<textFieldExpression><![CDATA["/"+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="202689e1-6c3f-4e99-823c-c31dbc1a9dad" x="0" y="0" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COOP_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1d91f09d-a7c6-4316-9181-44cdd5082b4b" x="0" y="60" width="555" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["จำนวนทุน " + $P{pay_num} + " ทุน"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ebdbcfd5-58fb-46ff-ac1c-bceec8cb31ca" x="49" y="80" width="200" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ระดับชั้น]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f008d738-fbfb-4667-964c-13ae31e80abf" x="249" y="80" width="74" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[จำนวนคำขอ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1acff670-4714-4ebf-bf4f-468f2aa3c52e" x="323" y="80" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ได้รับ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="cc1a6543-a7d4-4a16-a09c-d3b1cbea8583" x="49" y="0" width="200" height="20"/>
+				<textElement>
+					<font fontName="Angsana New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ASSISTPAY_CODE} + '-' + $F{ASSISTPAY_DESC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4237e0da-762b-4607-a401-d4edca88482f" x="249" y="0" width="74" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Angsana New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{num_pay}]]></textFieldExpression>
+			</textField>
+			<textField pattern="">
+				<reportElement uuid="043e7c87-856d-411c-ac2b-d075a82937a0" x="323" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Angsana New" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(($P{pay_num}/$F{fullmem})*$F{assitpay}).intValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="20" splitType="Stretch"/>
+	</summary>
+</jasperReport>

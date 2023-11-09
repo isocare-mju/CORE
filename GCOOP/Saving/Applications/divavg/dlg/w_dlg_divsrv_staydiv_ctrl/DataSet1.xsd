@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DTMAIN" msprop:Generator_TableClassName="DTMAINDataTable" msprop:Generator_TableVarName="tableDTMAIN" msprop:Generator_RowChangedName="DTMAINRowChanged" msprop:Generator_TablePropName="DTMAIN" msprop:Generator_RowDeletingName="DTMAINRowDeleting" msprop:Generator_RowChangingName="DTMAINRowChanging" msprop:Generator_RowEvHandlerName="DTMAINRowChangeEventHandler" msprop:Generator_RowDeletedName="DTMAINRowDeleted" msprop:Generator_RowClassName="DTMAINRow" msprop:Generator_UserTableName="DTMAIN" msprop:Generator_RowEvArgName="DTMAINRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="div_year" msprop:Generator_ColumnVarNameInTable="columndiv_year" msprop:Generator_ColumnPropNameInRow="div_year" msprop:Generator_ColumnPropNameInTable="div_yearColumn" msprop:Generator_UserColumnName="div_year" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DTLIST" msprop:Generator_TableClassName="DTLISTDataTable" msprop:Generator_TableVarName="tableDTLIST" msprop:Generator_RowChangedName="DTLISTRowChanged" msprop:Generator_TablePropName="DTLIST" msprop:Generator_RowDeletingName="DTLISTRowDeleting" msprop:Generator_RowChangingName="DTLISTRowChanging" msprop:Generator_RowEvHandlerName="DTLISTRowChangeEventHandler" msprop:Generator_RowDeletedName="DTLISTRowDeleted" msprop:Generator_RowClassName="DTLISTRow" msprop:Generator_UserTableName="DTLIST" msprop:Generator_RowEvArgName="DTLISTRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="member_no" msprop:Generator_ColumnVarNameInTable="columnmember_no" msprop:Generator_ColumnPropNameInRow="member_no" msprop:Generator_ColumnPropNameInTable="member_noColumn" msprop:Generator_UserColumnName="member_no" type="xs:string" minOccurs="0" />
+              <xs:element name="fullname" msprop:Generator_ColumnVarNameInTable="columnfullname" msprop:Generator_ColumnPropNameInRow="fullname" msprop:Generator_ColumnPropNameInTable="fullnameColumn" msprop:Generator_UserColumnName="fullname" type="xs:string" minOccurs="0" />
+              <xs:element name="fullgroup" msprop:Generator_ColumnVarNameInTable="columnfullgroup" msprop:Generator_ColumnPropNameInRow="fullgroup" msprop:Generator_ColumnPropNameInTable="fullgroupColumn" msprop:Generator_UserColumnName="fullgroup" type="xs:string" minOccurs="0" />
+              <xs:element name="methpaytype" msprop:Generator_ColumnVarNameInTable="columnmethpaytype" msprop:Generator_ColumnPropNameInRow="methpaytype" msprop:Generator_ColumnPropNameInTable="methpaytypeColumn" msprop:Generator_UserColumnName="methpaytype" type="xs:string" minOccurs="0" />
+              <xs:element name="payment_amt" msprop:Generator_ColumnVarNameInTable="columnpayment_amt" msprop:Generator_ColumnPropNameInRow="payment_amt" msprop:Generator_ColumnPropNameInTable="payment_amtColumn" msprop:Generator_UserColumnName="payment_amt" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
